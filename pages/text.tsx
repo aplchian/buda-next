@@ -135,7 +135,7 @@ export default () => {
 
 
 
-    <div className="lg:flex lg:items-center lg:justify-between max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4">
+    <div className="lg:flex lg:items-center lg:justify-between max-w-7xl container mx-auto px-4 sm:px-6 lg:px-8 mt-8">
         <div className="flex-1 min-w-0">
             <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
                 bdr:I4CZ75258
@@ -229,38 +229,26 @@ export default () => {
     </div>
 
 
-    <div className="relative pb-5 border-b border-gray-200 sm:pb-0">
+    <div className="relative pb-5 border-b border-gray-200 sm:pb-0 container mx-auto px-4 sm:px-6 lg:px-8">
 
         <div className="mt-4">
             {/* Dropdown menu on small screens */}
             <div className="sm:hidden">
                 <label htmlFor="selected-tab" className="sr-only">Select a tab</label>
                 <select id="selected-tab" name="selected-tab" className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                    <option>Applied</option>
-                    <option>Phone Screening</option>
-                    <option selected>Interview</option>
-                    <option>Offer</option>
-                    <option>Hired</option>
+                    <option selected>Pages</option>
+                    <option>Settings</option>
                 </select>
             </div>
             {/* Tabs at small breakpoint and up */}
             <div className="hidden sm:block">
                 <nav className="-mb-px flex space-x-8">
-                    <a href="#" className="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">
-                        Applied
-                    </a>
-                    <a href="#" className="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">
-                        Phone Screening
-                    </a>
                     {/* Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" */}
                     <a href="#" className="border-indigo-500 text-indigo-600 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm" aria-current="page">
-                        Interview
+                        Pages
                     </a>
                     <a href="#" className="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">
-                        Offer
-                    </a>
-                    <a href="#" className="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">
-                        Hired
+                        Settings
                     </a>
                 </nav>
             </div>
