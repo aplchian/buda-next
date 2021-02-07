@@ -1,7 +1,7 @@
 import uuidv4 from 'uuid/v4'
 import axios from 'axios'
 import { assoc, lensPath, map, over } from 'ramda'
-import { Buda } from '../../buda/types'
+import { Buda } from '../types'
 
 var apiroot = 'https://iiifpres.bdrc.io'
 

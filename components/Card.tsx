@@ -301,6 +301,7 @@ function ImageCard(props: {
             {!image.collapsed && (
                 <CardContent className="flex" style={{ padding: 0 }}>
                     {iiif ? (
+                        // @ts-ignore
                         <PreviewImage
                             i={props.i as never}
                             iiif={iiif as never}

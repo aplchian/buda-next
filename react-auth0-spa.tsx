@@ -25,7 +25,6 @@ export const Auth0Provider = ({
     onRedirectCallback = DEFAULT_REDIRECT_CALLBACK,
     ...initOptions
 }: {
-    s
     children: React.ReactElement
     onRedirectCallback: (appState: { targetUrl: any }) => void
 }) => {
@@ -37,6 +36,7 @@ export const Auth0Provider = ({
 
     useEffect(() => {
         const initAuth0 = async () => {
+            // @ts-ignore
             auth = new auth0.WebAuth(initOptions as AuthOptions)
             handleAuthentication()
             getUser()

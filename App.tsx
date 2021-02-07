@@ -32,7 +32,7 @@ import CardDropZone from './components/CardDropZone'
 import { getOrInitManifest } from './api/getManifest'
 import VolumeSearch from './components/VolumeSearch'
 import UpdateManifestError from './components/UpdateManifestError'
-import { Buda } from '../buda/types'
+import { Buda } from './types'
 import { setManifest } from './redux/actions/manifest'
 import { connect } from 'react-redux'
 

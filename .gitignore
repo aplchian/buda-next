@@ -12,6 +12,7 @@ package-lock.json
 
 # production
 /build
+.next/
 
 # misc
 .DS_Store
@@ -28,3 +29,4 @@ yarn-error.log*
 # config files
 src/auth_config.json
 src/auth_ext_config.json
+/.next/

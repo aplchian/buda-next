@@ -19,7 +19,7 @@ import uuidv4 from 'uuid/v4'
 import { useTranslation } from 'react-i18next'
 import { getPaginationTypes } from '../utils/pagination-prediction'
 import { Formik } from 'formik'
-import { Buda } from '../../buda/types'
+import { Buda } from '../types'
 
 const styles = (theme: Theme) =>
     createStyles({

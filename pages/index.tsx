@@ -18,6 +18,8 @@ const onRedirectCallback = (appState: { targetUrl: any }) => {
 export default function Home() {
     return (
         <Provider store={store}>
+            {/*
+ // @ts-ignore*/}
             <Auth0Provider
                 {...config.login}
                 onRedirectCallback={onRedirectCallback}

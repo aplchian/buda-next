@@ -5,7 +5,7 @@ import Select from '@material-ui/core/Select'
 import { lensPath } from 'ramda'
 import { useTranslation } from 'react-i18next'
 import AuthNavBar from './AuthNavBar'
-import { Buda } from '../../buda/types'
+import { Buda } from '../types'
 
 function AppBarTwo(props: {
     manifest: Buda.Manifest

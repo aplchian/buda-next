@@ -7,7 +7,13 @@ import { useTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 import { setImageView } from '../redux/actions/manifest'
 import { pathOr } from 'ramda'
-let OpenSeaDragon
+let OpenSeaDragon: (arg0: {
+    id: string
+    degrees: number
+    defaultZoomLevel: number
+    showRotationControl: boolean
+    tileSources: string[]
+}) => any
 
 if (typeof window !== 'undefined') {
     OpenSeaDragon = require('openseadragon')

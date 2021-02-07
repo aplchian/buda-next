@@ -1,9 +1,13 @@
 import axios from 'axios'
-import { AxiosResponse } from "axios";
-import { Buda } from '../../buda/types'
+import { AxiosResponse } from 'axios'
+import { Buda } from '../types'
 
 // having a changelog is mandatory
-function add_changelog(manifest: Buda.Manifest, userQname: string, changelogStr: Buda.Text) {
+function add_changelog(
+    manifest: Buda.Manifest,
+    userQname: string,
+    changelogStr: Buda.Text
+) {
     const now = new Date()
     const changelog = {
         time: now.toISOString(),

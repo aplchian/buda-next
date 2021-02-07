@@ -23,7 +23,7 @@ import {
     view,
     when,
 } from 'ramda'
-import { Buda } from '../../../buda/types'
+import { Buda } from '../../types'
 import uuidv4 from 'uuid/v4'
 import getPagination from '../../utils/pagination-prediction'
 import { getComparator } from '../../utils/pagination-comparators'
@@ -95,6 +95,7 @@ export default (
         case 'SET_UI_LANGUAGE':
             return set(
                 lensPath(['appData', 'bvmt', 'default-ui-string-lang']),
+                // @ts-ignore
                 action.payload,
                 manifest
             )

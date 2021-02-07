@@ -1,4 +1,4 @@
-import { Buda } from '../../../buda/types'
+import { Buda } from '../../types'
 
 export function setManifest(manifest: any) {
     return {
