@@ -1,0 +1,10 @@
+{
+    "login": {
+        "domain": "bdrc-io.auth0.com",
+        "clientID": "uBrFWlCdY7Nkq1YcSh8YURQnrl3ndJUk",
+        "redirectUri": "https://bvmt.bdrc.io",
+        "audience": "https://bdrc-io.auth0.com/userinfo",
+        "responseType": "token id_token",
+        "scope": "openid user_metadata app_metada profile email"
+    }
+}
