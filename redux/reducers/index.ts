@@ -116,6 +116,7 @@ export default (
 
         case 'REMOVE_OF_FIELD':
             return updateImage(action.payload.idx, (image: Buda.Image) =>
+                // @ts-ignore
                 dissoc(action.payload.ofField, image)
             )
 
