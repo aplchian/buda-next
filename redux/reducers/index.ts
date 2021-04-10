@@ -213,7 +213,9 @@ export default (
                 return compose(
                     when(always(removeDuplicateOf), dissoc('duplicate-of')),
                     when(always(removeDetailOf), dissoc('detail-of')),
+                // @ts-ignore
                     assoc('tags', action.payload.tags)
+                // @ts-ignore
                 )(image)
             })
 
