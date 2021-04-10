@@ -111,15 +111,15 @@ function App(props: any) {
             setIsLoadingMore(false)
         }, 3000)
     }
-    const sectionInUseCount = (sectionId: string) => {
-        return reduce(
-            (acc: number, val: Buda.Image) => {
-                return val.sectionId === sectionId ? ++acc : acc
-            },
-            0,
-            imageList
-        )
-    }
+    // const sectionInUseCount = (sectionId: string) => {
+    //     return reduce(
+    //         (acc: number, val: Buda.Image) => {
+    //             return val.sectionId === sectionId ? ++acc : acc
+    //         },
+    //         0,
+    //         imageList
+    //     )
+    // }
     const handleSettingsUpdate = curry((lens, value) => {
         const updatedManifest = set(lens, value, manifest)
         props.dispatch(setManifest(updatedManifest))
@@ -194,14 +194,14 @@ function App(props: any) {
                 ) : (
                     <div className="App">
                         <div>
-                            <Dialog
-                                appData={manifest.appData}
-                                sectionInUseCount={sectionInUseCount}
-                                open={settingsDialogOpen}
-                                handleClose={() => setSettingsDialog(false)}
-                                manifest={manifest}
-                                handleSettingsUpdate={handleSettingsUpdate}
-                            />
+                            {/*<Dialog*/}
+                            {/*    appData={manifest.appData}*/}
+                            {/*    sectionInUseCount={sectionInUseCount}*/}
+                            {/*    open={settingsDialogOpen}*/}
+                            {/*    // handleClose={() => setSettingsDialog(false)}*/}
+                            {/*    manifest={manifest}*/}
+                            {/*    handleSettingsUpdate={handleSettingsUpdate}*/}
+                            {/*/>*/}
                             {/*<div className="container mx-auto flex flex-row py-6">*/}
                                 {/*<div className="w-1/2 flex flex-col">*/}
                                 {/*    <span className="text-gray-600 text-sm">*/}

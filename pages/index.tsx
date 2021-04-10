@@ -1,4 +1,8 @@
+import React from 'react'
+import Link from 'next/link'
+
 export default () => {
+    const [volume, setVolume] = React.useState('')
     return <div>
         <Nav/>
         <Container>
@@ -7,11 +11,14 @@ export default () => {
             <div className="max-w-7xl mx-auto">
                 <div className="flex">
                     {/*<label htmlFor="email" className="sr-only">Email</label>*/}
-                    <input type="text" name="email" id="email" className="shadow-sm focus:ring-black focus:border-black block w-full sm:text-sm border-gray-300 rounded-md" placeholder="manifest id" />
+                    <input onChange={(e) => setVolume(e.target.value)} value={volume} type="text" name="email" id="email" className="shadow-sm focus:ring-black focus:border-black block w-full sm:text-sm border-gray-300 rounded-md" placeholder="manifest id" />
+
+                    <Link href={`manifest/${volume}`}>
                     <button type="button"
                             className="ml-6 inline-flex items-center px-4 py-2 border border-transparent shadow-sm font-medium rounded-md text-white bg-black hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black sm:text-sm">
                         Search
                     </button>
+                    </Link>
                 </div>
             </div>
         </main>
@@ -79,11 +86,13 @@ export const Nav = () => {
         <div className="max-w-7xl mx-auto  ">
             <div className="flex items-center justify-between h-16">
                 <div className="flex items-center">
+                    <Link href="/">
                     <div className="flex-shrink-0 flex">
                         <img className="h-10 w-10" src="/images/logo.svg" alt="logo"/>
                         {/*<span className="text-black text-lg bold">BUDA MANIFEST</span>*/}
 
                     </div>
+                    </Link>
                     {/*<div className="hidden md:block">*/}
                     {/*    <div className="ml-10 flex items-baseline space-x-4">*/}
                     {/*        /!* Current: "bg-indigo-700 text-black", Default: "text-black hover:bg-black hover:bg-opacity-75" *!/*/}

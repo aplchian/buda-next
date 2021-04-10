@@ -175,8 +175,8 @@ const DialogActions = withStyles(theme => ({
 }))(MuiDialogActions)
 
 export default function SettingsDialog(props: {
-    open: boolean
-    handleClose: any
+    // open: boolean
+    // handleClose: any
     handleSettingsUpdate: any
     sectionInUseCount: any
     appData: any
@@ -211,15 +211,8 @@ export default function SettingsDialog(props: {
 
     const { t } = useTranslation()
 
-    // @ts-ignore
     return (
-        <Dialog
-            onClose={props.handleClose}
-            aria-labelledby="customized-dialog-title"
-            open={props.open}
-            fullWidth
-        >
-            <DialogTitle onClose={props.handleClose}>{t('Edit')}</DialogTitle>
+
             <div className="p-3">
                 <div className="w-full">
                     <div className="w-2/4">
@@ -456,16 +449,7 @@ export default function SettingsDialog(props: {
                         )}
                     </Formik>
                 </div>
-                <DialogActions>
-                    <Button
-                        autoFocus
-                        onClick={props.handleClose}
-                        color="primary"
-                    >
-                        {t('OK')}
-                    </Button>
-                </DialogActions>
+
             </div>
-        </Dialog>
     )
 }

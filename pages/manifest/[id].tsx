@@ -5,16 +5,19 @@ import React from "react";
 import {getOrInitManifest} from "../../api/getManifest";
 import {setManifest} from "../../redux/actions/manifest";
 import {connect} from "react-redux";
-import {curry, set} from "ramda";
+import {curry, lensPath, reduce, set, view} from "ramda";
+import Dialog from "../../components/Dialog";
+import {Buda} from "../../types";
 
 const Manifest = (props: { volume: string, dispatch: any, manifest: any }) => {
-    console.log('props', props)
     const handleSettingsUpdate = curry((lens, value) => {
         const updatedManifest = set(lens, value, props.manifest)
         props.dispatch(setManifest(updatedManifest))
     })
     const [isFetching, setIsFetching] = React.useState(false)
     const [fetchErr, setFetchErr] = React.useState(null)
+    const [selectedTab, setSelectedTab] = React.useState('manifest')
+
     React.useEffect(() => {
         const { volume } = props
         setFetchErr(null)
@@ -37,13 +40,36 @@ const Manifest = (props: { volume: string, dispatch: any, manifest: any }) => {
             getData()
         }
     }, [])
+
+
+    const imageListLens = lensPath(['view', 'view1', 'imagelist'])
+    const imageList = (view(imageListLens, props.manifest) as Buda.Image[]) || []
+    const sectionInUseCount = (sectionId: string) => {
+        return reduce(
+            (acc: number, val: Buda.Image) => {
+                return val.sectionId === sectionId ? ++acc : acc
+            },
+            0,
+            imageList
+        )
+    }
     return <div>
         <AppBar manifest={props.manifest} handleSettingsUpdate={handleSettingsUpdate}/>
         <Container>
-            <SectionHeadings/>
+            <SectionHeadings selectedTab={selectedTab} setSelectedTab={setSelectedTab}/>
             <main>
                 <div className="max-w-7xl mx-auto py-6">
-                    <App volume={props.volume} />
+                    {selectedTab === 'manifest' && <App volume={props.volume} />}
+                    {selectedTab === 'settings' && <Dialog
+                        appData={props.manifest.appData}
+                        sectionInUseCount={sectionInUseCount}
+                        // open={settingsDialogOpen}
+                        // handleClose={() => setSettingsDialog(false)}
+                        manifest={props.manifest}
+                        handleSettingsUpdate={handleSettingsUpdate}
+                    />}
+
+
                 </div>
             </main>
 
@@ -69,7 +95,9 @@ export default connect(mapStateToProps)(Manifest)
 
 
 
-const SectionHeadings = () => {
+const SectionHeadings = (props: { selectedTab: string, setSelectedTab: (arg1: string) => void }) => {
+    const selectedStyling = "black text-black whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm"
+    const notSelectedStyling = "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm"
     return <div className="pb-5 border-b border-gray-200 sm:pb-0">
         {/*<h3 className="text-lg leading-6 font-medium text-gray-900">*/}
         {/*    Candidates*/}
@@ -80,7 +108,7 @@ const SectionHeadings = () => {
                 <label htmlFor="current-tab" className="sr-only">Select a tab</label>
                 <select id="current-tab" name="current-tab" className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:black focus:black sm:text-sm rounded-md">
                     <option selected>Bdr:c42d</option>
-                    <option selected>Settings</option>
+                    <option>Settings</option>
                     {/*<option>Phone Screening</option>*/}
                     {/*<option selected>Interview</option>*/}
                     {/*<option>Offer</option>*/}
@@ -97,12 +125,12 @@ const SectionHeadings = () => {
                     {/*<a href="#" className="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">*/}
                     {/*    Phone Screening*/}
                     {/*</a>*/}
-                    <a href="#" className="black text-black whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm" aria-current="page">
+                    <span onClick={() => props.setSelectedTab('manifest')} className={props.selectedTab === 'manifest' ? selectedStyling : notSelectedStyling} aria-current="page">
                         Bdr:c42d
-                    </a>
-                    <a href="#" className="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">
+                    </span>
+                    <span onClick={() => props.setSelectedTab('settings')}  className={props.selectedTab === 'settings' ? selectedStyling : notSelectedStyling}>
                         Settings
-                    </a>
+                    </span>
                     {/*<a href="#" className="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">*/}
                     {/*    Hired*/}
                     {/*</a>*/}
