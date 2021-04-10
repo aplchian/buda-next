@@ -1,14 +1,12 @@
 import React from 'react'
-import AppBar from './components/AppBar'
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
+import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles'
 import Card from './components/Card'
-import { DndProvider } from 'react-dnd'
-import FilterList from './components/FilterList'
+import {DndProvider} from 'react-dnd'
 import Backend from 'react-dnd-html5-backend'
 import postUpdate from './api/postUpdate'
-import { useTranslation } from 'react-i18next'
+import {useTranslation} from 'react-i18next'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import { useAuth0 } from './react-auth0-spa'
+import {useAuth0} from './react-auth0-spa'
 import {
     addIndex,
     assoc,
@@ -25,16 +23,15 @@ import {
     set,
     view,
 } from 'ramda'
-import SettingsIcon from '@material-ui/icons/Settings'
 import Dialog from './components/Dialog'
 import InfiniteScroll from 'react-infinite-scroller'
 import CardDropZone from './components/CardDropZone'
-import { getOrInitManifest } from './api/getManifest'
+import {getOrInitManifest} from './api/getManifest'
 import VolumeSearch from './components/VolumeSearch'
 import UpdateManifestError from './components/UpdateManifestError'
-import { Buda } from './types'
-import { setManifest } from './redux/actions/manifest'
-import { connect } from 'react-redux'
+import {Buda} from './types'
+import {setManifest} from './redux/actions/manifest'
+import {connect} from 'react-redux'
 
 const mapIndex = addIndex(map)
 const theme = createMuiTheme({
@@ -60,9 +57,7 @@ function App(props: any) {
 
     const { dispatch } = props
     React.useEffect(() => {
-        const search = window.location.search
-        const params = new URLSearchParams(search)
-        const volume = params.get('volume')
+       const { volume } = props
         setFetchErr(null)
         if (!volume) {
             setIsFetching(false)
@@ -171,23 +166,24 @@ function App(props: any) {
     return (
         <ThemeProvider theme={theme}>
             <DndProvider backend={Backend}>
-                <AppBar
-                    manifest={manifest}
-                    handleSettingsUpdate={handleSettingsUpdate}
-                >
-                    {!manifest.isDefault && (
-                        <FilterList
-                            handleSettingsUpdate={handleSettingsUpdate}
-                            manifest={manifest}
-                            foldCheckedImages={foldCheckedImages}
-                        />
-                    )}
-                </AppBar>
+                {/*<AppBar*/}
+                {/*    manifest={manifest}*/}
+                {/*    handleSettingsUpdate={handleSettingsUpdate}*/}
+                {/*>*/}
+                {/*    {!manifest.isDefault && (*/}
+                {/*        <FilterList*/}
+                {/*            handleSettingsUpdate={handleSettingsUpdate}*/}
+                {/*            manifest={manifest}*/}
+                {/*            foldCheckedImages={foldCheckedImages}*/}
+                {/*        />*/}
+                {/*    )}*/}
+                {/*</AppBar>*/}
                 <UpdateManifestError
                     postErr={postErr}
                     setPostErr={setPostErr}
                 />
-                {manifest.isDefault ? (
+                {/*{manifest.isDefault ? (*/}
+                {false ? (
                     <VolumeSearch
                         isFetching={isFetching}
                         fetchErr={fetchErr}
@@ -196,7 +192,7 @@ function App(props: any) {
                             : {})}
                     />
                 ) : (
-                    <div className="App" style={{ paddingTop: 125 }}>
+                    <div className="App">
                         <div>
                             <Dialog
                                 appData={manifest.appData}
@@ -206,41 +202,41 @@ function App(props: any) {
                                 manifest={manifest}
                                 handleSettingsUpdate={handleSettingsUpdate}
                             />
-                            <div className="container mx-auto flex flex-row py-6">
-                                <div className="w-1/2 flex flex-col">
-                                    <span className="text-gray-600 text-sm">
-                                        {t('Volume')}
-                                    </span>
-                                    <span className="text-sm font-bold text-xl mb-3">
-                                        {manifest['imggroup']}
-                                        <span
-                                            onClick={() =>
-                                                setSettingsDialog(true)
-                                            }
-                                            className="underline text-md font-medium cursor-pointer"
-                                        >
-                                            <SettingsIcon />
-                                        </span>
-                                    </span>
-                                    {/*<span className="underline text-blue-600 cursor-pointer">*/}
-                                    {/*    {t('Preview')}*/}
-                                    {/*</span>*/}
-                                </div>
-                                <div className="w-1/2 flex flex-col">
-                                    <div className="self-end">
-                                        {auth.isAuthenticated && (
-                                            <span
-                                                className="underline text-md font-medium cursor-pointer mr-5"
-                                                onClick={() =>
-                                                    saveUpdatesToManifest(auth)
-                                                }
-                                            >
-                                                {t('SAVE')}
-                                            </span>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
+                            {/*<div className="container mx-auto flex flex-row py-6">*/}
+                                {/*<div className="w-1/2 flex flex-col">*/}
+                                {/*    <span className="text-gray-600 text-sm">*/}
+                                {/*        {t('Volume')}*/}
+                                {/*    </span>*/}
+                                {/*    <span className="text-sm font-bold text-xl mb-3">*/}
+                                {/*        {manifest['imggroup']}*/}
+                                {/*        <span*/}
+                                {/*            onClick={() =>*/}
+                                {/*                setSettingsDialog(true)*/}
+                                {/*            }*/}
+                                {/*            className="underline text-md font-medium cursor-pointer"*/}
+                                {/*        >*/}
+                                {/*            <SettingsIcon />*/}
+                                {/*        </span>*/}
+                                {/*    </span>*/}
+                                {/*    /!*<span className="underline text-blue-600 cursor-pointer">*!/*/}
+                                {/*    /!*    {t('Preview')}*!/*/}
+                                {/*    /!*</span>*!/*/}
+                                {/*</div>*/}
+                                {/*<div className="w-1/2 flex flex-col">*/}
+                                {/*    <div className="self-end">*/}
+                                {/*        {auth.isAuthenticated && (*/}
+                                {/*            <span*/}
+                                {/*                className="underline text-md font-medium cursor-pointer mr-5"*/}
+                                {/*                onClick={() =>*/}
+                                {/*                    saveUpdatesToManifest(auth)*/}
+                                {/*                }*/}
+                                {/*            >*/}
+                                {/*                {t('SAVE')}*/}
+                                {/*            </span>*/}
+                                {/*        )}*/}
+                                {/*    </div>*/}
+                                {/*</div>*/}
+                            {/*</div>*/}
                             <div className="container mx-auto">
                                 <InfiniteScroll
                                     pageStart={0}

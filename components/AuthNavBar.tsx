@@ -1,6 +1,6 @@
 import React from 'react'
 // import history from '../../buda/src/utils/history'
-import { useAuth0 } from '../react-auth0-spa'
+import {useAuth0} from '../react-auth0-spa'
 
 const AuthNavBar = () => {
     const {
@@ -18,16 +18,16 @@ const AuthNavBar = () => {
     return (
         <div className="ml-4">
             {!isAuthenticated && (
-                <button
+                <div
                     onClick={() => {
                         // loginWithRedirect(history.location)
                     }}
                 >
                     Log in
-                </button>
+                </div>
             )}
             {isAuthenticated && (
-                <button style={{ lineHeight: '15px' }} onClick={() => logout()}>
+                <div style={{ lineHeight: '15px' }} onClick={() => logout()}>
                     {user.bdrcID && (
                         <span
                             style={{ fontSize: '12px', verticalAlign: '6px' }}
@@ -38,7 +38,7 @@ const AuthNavBar = () => {
                     )}
                     <br />
                     Log out
-                </button>
+                </div>
             )}
         </div>
     )
