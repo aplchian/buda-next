@@ -6,9 +6,11 @@
 @tailwind components;
 /* Stop purging. */
 
-html,
-body {
-    @apply bg-white;
+
+
+html, body, #app, #app>div {
+    height: 100%;
+    @apply bg-gray-200;
 }
 
 /* Write your own custom component styles here */

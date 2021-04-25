@@ -3,6 +3,7 @@ import {useTranslation} from 'react-i18next'
 import AuthNavBar from './AuthNavBar'
 import {Buda} from '../types'
 import {Container} from "../pages";
+import Link from 'next/link'
 
 function AppBarTwo(props: {
     manifest: Buda.Manifest
@@ -19,7 +20,10 @@ function AppBarTwo(props: {
                         <div className="flex items-center justify-between h-16">
                             <div className="flex items-center">
                                 <div className="flex-shrink-0 flex">
-                                    <img className="h-10 w-10" src="/images/logo.svg" alt="logo"/>
+                                    <Link href="/">
+                                    <img className="h-10 w-10 cursor-pointer" src="/images/logo.svg" alt="logo"/>
+
+                                    </Link>
                                     {/*<span className="text-black text-lg bold">BUDA MANIFEST</span>*/}
 
                                 </div>

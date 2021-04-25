@@ -3,22 +3,49 @@ import Link from 'next/link'
 
 export default () => {
     const [volume, setVolume] = React.useState('')
-    return <div>
+    return <div className="">
         <Nav/>
         <Container>
-        <SectionHeadings />
+        {/*<SectionHeadings />*/}
         <main>
-            <div className="max-w-7xl mx-auto">
-                <div className="flex">
-                    {/*<label htmlFor="email" className="sr-only">Email</label>*/}
-                    <input onChange={(e) => setVolume(e.target.value)} value={volume} type="text" name="email" id="email" className="shadow-sm focus:ring-black focus:border-black block w-full sm:text-sm border-gray-300 rounded-md" placeholder="manifest id" />
+            <div className="max-w-7xl mx-auto flex justify-center items-center">
+                {/*<div className="flex">*/}
+                {/*    /!*<label htmlFor="email" className="sr-only">Email</label>*!/*/}
 
-                    <Link href={`manifest/${volume}`}>
-                    <button type="button"
-                            className="ml-6 inline-flex items-center px-4 py-2 border border-transparent shadow-sm font-medium rounded-md text-white bg-black hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black sm:text-sm">
-                        Search
-                    </button>
-                    </Link>
+
+                {/*    <Link href={`manifest/${volume}`}>*/}
+                {/*    <button type="button"*/}
+                {/*            className="ml-6 inline-flex items-center px-4 py-2 border border-transparent shadow-sm font-medium rounded-md text-white bg-black hover:bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black sm:text-sm">*/}
+                {/*        Search*/}
+                {/*    </button>*/}
+                {/*    </Link>*/}
+                {/*</div>*/}
+
+                <div className="bg-white shadow sm:rounded-lg w-1/2 mt-40">
+                    <div className="px-4 py-5 sm:p-6">
+                        <h3 className="text-lg leading-6 font-medium text-gray-900">Search for Manifest</h3>
+                        {/*<div className="mt-2 max-w-xl text-sm text-gray-500">*/}
+                        {/*    <p>Change the email address you want associated with your account.</p>*/}
+                        {/*</div>*/}
+                        <form className="mt-5 sm:flex sm:items-center">
+                            <div className="w-full sm:max-w-xs">
+                                <label htmlFor="email" className="sr-only">
+                                    Email
+                                </label>
+
+                                <input onChange={(e) => setVolume(e.target.value)} value={volume} type="text" name="email" id="email"  className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="manifest id" />
+                            </div>
+                            <Link href={`manifest/${volume}`}>
+                            <button
+                                type="submit"
+                                className="mt-3 w-full inline-flex items-center justify-center px-4 py-2 border border-transparent shadow-sm font-medium rounded-md text-white hover:text-black bg-black hover:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                            >
+
+                                Go
+                            </button>
+                            </Link>
+                        </form>
+                    </div>
                 </div>
             </div>
         </main>
@@ -26,6 +53,7 @@ export default () => {
     </div>
 
 }
+
 
 const SectionHeadings = () => {
     return <div className="pb-5 border-b border-gray-200 sm:pb-0">
@@ -86,13 +114,13 @@ export const Nav = () => {
         <div className="max-w-7xl mx-auto  ">
             <div className="flex items-center justify-between h-16">
                 <div className="flex items-center">
-                    <Link href="/">
                     <div className="flex-shrink-0 flex">
+                    <Link href="/">
                         <img className="h-10 w-10" src="/images/logo.svg" alt="logo"/>
+                    </Link>
                         {/*<span className="text-black text-lg bold">BUDA MANIFEST</span>*/}
 
                     </div>
-                    </Link>
                     {/*<div className="hidden md:block">*/}
                     {/*    <div className="ml-10 flex items-baseline space-x-4">*/}
                     {/*        /!* Current: "bg-indigo-700 text-black", Default: "text-black hover:bg-black hover:bg-opacity-75" *!/*/}

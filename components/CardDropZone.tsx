@@ -27,7 +27,7 @@ function CardDropZone({
                 width: '100%',
                 height: isOver ? '30px' : '16px',
                 padding: isOver ? '2em 0' : 0,
-                backgroundColor: 'white',
+                // backgroundColor: 'white',
             }}
             className="my-4"
         >

@@ -8,13 +8,14 @@ import {connect} from "react-redux";
 import {curry, lensPath, reduce, set, view} from "ramda";
 import Dialog from "../../components/Dialog";
 import {Buda} from "../../types";
+import Link from 'next/link'
 
 const Manifest = (props: { volume: string, dispatch: any, manifest: any }) => {
     const handleSettingsUpdate = curry((lens, value) => {
         const updatedManifest = set(lens, value, props.manifest)
         props.dispatch(setManifest(updatedManifest))
     })
-    const [isFetching, setIsFetching] = React.useState(false)
+    const [isFetching, setIsFetching] = React.useState(true)
     const [fetchErr, setFetchErr] = React.useState(null)
     const [selectedTab, setSelectedTab] = React.useState('manifest')
 
@@ -41,7 +42,6 @@ const Manifest = (props: { volume: string, dispatch: any, manifest: any }) => {
         }
     }, [])
 
-
     const imageListLens = lensPath(['view', 'view1', 'imagelist'])
     const imageList = (view(imageListLens, props.manifest) as Buda.Image[]) || []
     const sectionInUseCount = (sectionId: string) => {
@@ -53,25 +53,44 @@ const Manifest = (props: { volume: string, dispatch: any, manifest: any }) => {
             imageList
         )
     }
+
+    const VisibleWrapper = ({children, show}: { children: React.ReactElement; show: boolean }) => {
+        return <div className={`${show ? '': 'hidden'}`}>
+            {children}
+        </div>
+    }
+    const showManifest = !fetchErr && !isFetching && props.manifest
     return <div>
         <AppBar manifest={props.manifest} handleSettingsUpdate={handleSettingsUpdate}/>
+        {showManifest && <SectionHeadings selectedTab={selectedTab} setSelectedTab={setSelectedTab}/>}
         <Container>
-            <SectionHeadings selectedTab={selectedTab} setSelectedTab={setSelectedTab}/>
-            <main>
-                <div className="max-w-7xl mx-auto py-6">
-                    {selectedTab === 'manifest' && <App volume={props.volume} />}
-                    {selectedTab === 'settings' && <Dialog
-                        appData={props.manifest.appData}
-                        sectionInUseCount={sectionInUseCount}
-                        // open={settingsDialogOpen}
-                        // handleClose={() => setSettingsDialog(false)}
-                        manifest={props.manifest}
-                        handleSettingsUpdate={handleSettingsUpdate}
-                    />}
+            {
+                fetchErr && (
+                    <div className="text-center text-lg mt-10">Manifest was not found. <Link href="/"><span className="underline text-blue cursor-pointer">Click here to try again.</span></Link></div>
+                )
+            }
+            {
+                showManifest && <>
+
+                    <main>
+                        <div className="max-w-7xl mx-auto py-6">
+                            <div className={`${selectedTab === 'manifest' ? '': 'hidden'}`}>
+                                <App volume={props.volume} />
+                            </div>
+                            <VisibleWrapper show={selectedTab === 'settings'}><Dialog
+                                appData={props.manifest.appData}
+                                sectionInUseCount={sectionInUseCount}
+                                // open={settingsDialogOpen}
+                                // handleClose={() => setSettingsDialog(false)}
+                                manifest={props.manifest}
+                                handleSettingsUpdate={handleSettingsUpdate}
+                            /></VisibleWrapper>
 
 
-                </div>
-            </main>
+                        </div>
+                    </main></>
+            }
+
 
         </Container>
     </div>
@@ -96,13 +115,14 @@ export default connect(mapStateToProps)(Manifest)
 
 
 const SectionHeadings = (props: { selectedTab: string, setSelectedTab: (arg1: string) => void }) => {
-    const selectedStyling = "black text-black whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm"
-    const notSelectedStyling = "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm"
-    return <div className="pb-5 border-b border-gray-200 sm:pb-0">
+    const selectedStyling = "black text-black whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm cursor-pointer"
+    const notSelectedStyling = "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm cursor-pointer"
+    return <div className="pt-2 border-b border-gray-200 bg-white">
+        <Container>
         {/*<h3 className="text-lg leading-6 font-medium text-gray-900">*/}
         {/*    Candidates*/}
         {/*</h3>*/}
-        <div className="mt-3 sm:mt-4">
+        <div className="">
             {/* Dropdown menu on small screens */}
             <div className="sm:hidden">
                 <label htmlFor="current-tab" className="sr-only">Select a tab</label>
@@ -137,6 +157,7 @@ const SectionHeadings = (props: { selectedTab: string, setSelectedTab: (arg1: st
                 </nav>
             </div>
         </div>
+        </Container>
     </div>
 
 }
